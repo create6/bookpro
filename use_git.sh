@@ -7,7 +7,7 @@ git push
 
 
 
-#git rm --cached haha.sh
-#git commit -m 'delete remote somefile'
-#git push
+git rm --cached use_git.sh
+git commit -m 'delete remote somefile'
+git push
 
