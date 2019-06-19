@@ -125,3 +125,27 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# DRF配置,全局配置
+REST_FRAMEWORK = {
+    #1,认证
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        # 'rest_framework.authentication.BasicAuthentication', #基础认证，一般测试，http测试
+        'rest_framework.authentication.SessionAuthentication',  #用户认证
+    ),
+    #2,权限
+    'DEFAULT_PERMISSION_CLASSES': (
+        # 'rest_framework.permissions.IsAuthenticated',  #认证用户
+    # 'rest_framework.permissions.AllowAny',  #任何用户
+    'rest_framework.permissions.IsAdminUser',  #管理员权限
+
+
+
+
+    )
+
+
+
+}
+
+

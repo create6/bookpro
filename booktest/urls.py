@@ -12,7 +12,7 @@ router =DefaultRouter()
 router.register(r'book',views.BookModelView,base_name='vbook')
 #3,添加至列表url
 urlpatterns += router.urls
-print(router.urls)
+# print(router.urls)
 
 '''[
 <RegexURLPattern vbook-list ^book/$>,
