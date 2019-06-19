@@ -139,6 +139,16 @@ REST_FRAMEWORK = {
     # 'rest_framework.permissions.AllowAny',  #任何用户
     'rest_framework.permissions.IsAdminUser',  #管理员权限
 
+    #3,限流
+    'DEFAULT_THROTTLE_CLASSES': (
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle'
+    ),
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '100/day',
+        'user': '1000/day'
+}
+
 
 
 
