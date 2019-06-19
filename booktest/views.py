@@ -8,7 +8,7 @@ from rest_framework.viewsets import ModelViewSet
 from .serializer import BookInfoModelSerializer,HeroInfoModelSerializer
 from .models import BookInfo,HeroInfo
 from rest_framework.throttling import AnonRateThrottle
-
+from rest_framework import filters  #注意
 
 #自定义分页类,改写
 class MyPageNumber(PageNumberPagination):
@@ -47,8 +47,11 @@ class BookModelView(ModelViewSet):
         http://api.example.org/accounts/?page=4&page_size=100'''
     #7,过滤设置
     #DEMO:  http://example.com/api/products?category=clothing&in_stock=True
-    filter_backends = (DjangoFilterBackend,)
-    filterset_fields = ('id', 'btitle')
+    # filter_backends = (DjangoFilterBackend,)
+    # filterset_fields = ('id', 'btitle')
+    #8,排序   ?ordering=id
+    filter_backends = (filters.OrderingFilter,)
+    ordering_fields = ('id', 'bread','bcomment')
 
 
 #三级视图--英雄
@@ -61,3 +64,6 @@ class HeroModelView(ModelViewSet):
 
     # pagination_class = PageNumberPagination
     pagination_class = MyPageNumber
+    # 8,排序   ?ordering=id
+    filter_backends = (filters.OrderingFilter,)
+    ordering_fields = ('id', 'hbook')
