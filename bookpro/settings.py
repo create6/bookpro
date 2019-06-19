@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'booktest',
     'rest_framework',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -133,26 +134,44 @@ REST_FRAMEWORK = {
         # 'rest_framework.authentication.BasicAuthentication', #基础认证，一般测试，http测试
         'rest_framework.authentication.SessionAuthentication',  #用户认证
     ),
+
     #2,权限
     'DEFAULT_PERMISSION_CLASSES': (
         # 'rest_framework.permissions.IsAuthenticated',  #认证用户
     # 'rest_framework.permissions.AllowAny',  #任何用户
-    'rest_framework.permissions.IsAdminUser',  #管理员权限
+    # 'rest_framework.permissions.IsAdminUser',  #管理员权限
+    ),
+
 
     #3,限流
-    'DEFAULT_THROTTLE_CLASSES': (
-        'rest_framework.throttling.AnonRateThrottle',
-        'rest_framework.throttling.UserRateThrottle'
-    ),
-    'DEFAULT_THROTTLE_RATES': {
-        'anon': '100/day',
-        'user': '1000/day'
-}
+    # 'DEFAULT_THROTTLE_CLASSES':(
+    #     'rest_framework.throttling.AnonRateThrottle',
+    #     'rest_framework.throttling.UserRateThrottle'
+    # ),
+    # 'DEFAULT_THROTTLE_RATES':{'anon':'2/minute','user': '5/minute'},
+
+    #4,可选限流
+    # 'DEFAULT_THROTTLE_CLASSES': (
+    #     'rest_framework.throttling.ScopedRateThrottle',
+    # ),
+    # 'DEFAULT_THROTTLE_RATES': {
+    #     'downloads': '5/minute',
+    #     'uploads': '2/minute',
+    # },
+
+    #5,分页
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    # 'PAGE_SIZE': 2  ,
+    #6,过滤，官方文档参考 DjangoFilterBackend,,
+    # 注意点1：pip install django-filter  注意点2：要将django_filters 注册至子应用中
+
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
 
 
 
 
-    )
+
+
 
 
 
