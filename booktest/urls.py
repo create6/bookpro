@@ -3,7 +3,7 @@ from . import views
 from rest_framework.routers import DefaultRouter
 
 urlpatterns=[
-    # url(r'^test/$',views.TestThrottling.as_view())
+    url(r'^test/$',views.TestView.as_view())
 
 ]
 

@@ -1,5 +1,6 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.authentication import SessionAuthentication,BasicAuthentication
+from rest_framework.exceptions import APIException
 from rest_framework.pagination import LimitOffsetPagination, PageNumberPagination
 from rest_framework.permissions import AllowAny,IsAuthenticated
 from rest_framework.response import Response
@@ -9,6 +10,8 @@ from .serializer import BookInfoModelSerializer,HeroInfoModelSerializer
 from .models import BookInfo,HeroInfo
 from rest_framework.throttling import AnonRateThrottle
 from rest_framework import filters  #注意
+from redis import RedisError
+from django.db import DatabaseError
 
 #自定义分页类,改写
 class MyPageNumber(PageNumberPagination):
@@ -50,8 +53,10 @@ class BookModelView(ModelViewSet):
     # filter_backends = (DjangoFilterBackend,)
     # filterset_fields = ('id', 'btitle')
     #8,排序   ?ordering=id
-    filter_backends = (filters.OrderingFilter,)
-    ordering_fields = ('id', 'bread','bcomment')
+    # filter_backends = (filters.OrderingFilter,)
+    # ordering_fields = ('id', 'bread','bcomment')
+    #9,异常处理(API类异常，其他异常)
+
 
 
 #三级视图--英雄
@@ -67,3 +72,14 @@ class HeroModelView(ModelViewSet):
     # 8,排序   ?ordering=id
     filter_backends = (filters.OrderingFilter,)
     ordering_fields = ('id', 'hbook')
+
+
+class TestView(APIView):
+
+    def get(self,request):
+        # 9.1抛出API异常
+        raise APIException('api异常')
+        # raise DatabaseError('error')
+        # raise RedisError('redis error')
+
+        return Response("hello")

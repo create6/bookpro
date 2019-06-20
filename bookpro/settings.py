@@ -166,6 +166,8 @@ REST_FRAMEWORK = {
     # 注意点1：pip install django-filter  注意点2：要将django_filters 注册至子应用中
 
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
+    #7异常处理
+    'EXCEPTION_HANDLER': 'booktest.MyExceptions.custom_exception_handler',
 
 
 
